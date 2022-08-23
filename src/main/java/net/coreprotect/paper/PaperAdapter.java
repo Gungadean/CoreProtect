@@ -1,6 +1,7 @@
 package net.coreprotect.paper;
 
 import org.bukkit.Server;
+import org.bukkit.entity.Villager;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
@@ -31,8 +32,9 @@ public class PaperAdapter implements PaperInterface {
                 break;
             case PAPER_V1_13:
             case PAPER_V1_14:
-            case PAPER_V1_15:
                 PaperAdapter.ADAPTER = new PaperHandler();
+            case PAPER_V1_15:
+                PaperAdapter.ADAPTER = new Paper_v1_15();
                 break;
             case PAPER_V1_16:
             case PAPER_V1_17:
@@ -42,6 +44,15 @@ public class PaperAdapter implements PaperInterface {
                 PaperAdapter.ADAPTER = new Paper_v1_16();
                 break;
         }
+    }
+
+    @Override
+    public Object getReputation(Villager villager) {
+        return null;
+    }
+
+    @Override
+    public void setReputation(Villager villager, Object reputations) {
     }
 
     @Override

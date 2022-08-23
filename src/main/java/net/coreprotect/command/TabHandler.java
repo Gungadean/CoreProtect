@@ -170,7 +170,7 @@ public class TabHandler implements TabCompleter {
                     arg = split[1];
                 }
 
-                List<String> completions = Bukkit.getOnlinePlayers().stream().map(Player::getName).collect(Collectors.toList());
+                List<String> completions = Bukkit.getOnlinePlayers().stream().filter(player -> ((Player) sender).canSee(player)).map(Player::getName).collect(Collectors.toList());
                 for (int index = 0; index < completions.size(); index++) {
                     completions.set(index, filter + completions.get(index));
                 }

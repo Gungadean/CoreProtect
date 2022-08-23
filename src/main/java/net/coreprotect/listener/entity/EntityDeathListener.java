@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import net.coreprotect.paper.PaperAdapter;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
@@ -398,6 +399,10 @@ public final class EntityDeathListener extends Queue implements Listener {
                     info.add(recipes);
                     info.add(villager.getVillagerLevel());
                     info.add(villager.getVillagerExperience());
+                    Object rep = PaperAdapter.ADAPTER.getReputation(villager);
+                    if(rep != null) {
+                        info.add(rep);
+                    }
                 }
                 else {
                     info.add(null);

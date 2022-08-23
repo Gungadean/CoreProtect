@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import net.coreprotect.paper.PaperAdapter;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Location;
@@ -391,6 +392,9 @@ public class EntityUtil {
                             else if (count == 4) {
                                 int set = (int) value;
                                 villager.setVillagerExperience(set);
+                            }
+                            else if (count == 5) {
+                                PaperAdapter.ADAPTER.setReputation(villager, value);
                             }
                         }
                     }
