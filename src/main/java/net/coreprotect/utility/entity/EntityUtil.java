@@ -18,6 +18,7 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.AbstractHorse;
 import org.bukkit.entity.AbstractVillager;
 import org.bukkit.entity.Ageable;
+import org.bukkit.entity.Bee;
 import org.bukkit.entity.Cat;
 import org.bukkit.entity.ChestedHorse;
 import org.bukkit.entity.Creeper;
@@ -59,6 +60,7 @@ import net.coreprotect.CoreProtect;
 import net.coreprotect.bukkit.BukkitAdapter;
 import net.coreprotect.database.Rollback;
 import net.coreprotect.thread.CacheHandler;
+import net.coreprotect.thread.Scheduler;
 import net.coreprotect.utility.Util;
 
 public class EntityUtil {
@@ -71,7 +73,7 @@ public class EntityUtil {
         if (type == null) {
             return;
         }
-        Bukkit.getServer().getScheduler().runTask(CoreProtect.getInstance(), () -> {
+        Scheduler.runTask(CoreProtect.getInstance(), () -> {
             try {
                 Location location = block.getLocation();
                 location.setX(location.getX() + 0.50);
@@ -536,6 +538,21 @@ public class EntityUtil {
                             }
                         }
                     }
+                    else if (entity instanceof Bee) {
+                        Bee bee = (Bee) entity;
+                        if (count == 0) {
+                            int set = (int) value;
+                            bee.setAnger(set);
+                        }
+                        else if (count == 1) {
+                            boolean set = (Boolean) value;
+                            bee.setHasNectar(set);
+                        }
+                        else if (count == 2) {
+                            boolean set = (Boolean) value;
+                            bee.setHasStung(set);
+                        }
+                    }
                     else {
                         BukkitAdapter.ADAPTER.setEntityMeta(entity, value, count);
                     }
@@ -545,7 +562,7 @@ public class EntityUtil {
             catch (Exception e) {
                 e.printStackTrace();
             }
-        });
+        }, block.getLocation());
     }
 
 }

@@ -7,8 +7,8 @@ plugins {
 }
 
 group = 'net.coreprotect'
-String projectVersion = '21.3.1'
-String projectBranch = 'development'
+String projectVersion = '21.3'
+String projectBranch = ''
 version = projectVersion // `version` might be modified, we don't always want that (e.g. plugin.yml)
 description = 'Provides block protection for your server.'
 sourceCompatibility = '17'
@@ -52,6 +52,10 @@ shadowJar {
         // #toString because #getGroup technically returns an Object
         relocate('org.bstats', project.group.toString())
         relocate('com.zaxxer', project.group.toString())
+        exclude(dependency('com.google.code.gson:.*'))
+        exclude(dependency('org.intellij:.*'))
+        exclude(dependency('org.jetbrains:.*'))
+        exclude(dependency('org.slf4j:.*'))
     }
     archiveClassifier.set(null)
 }
@@ -85,4 +89,3 @@ processResources {
         }
     })
 }
-

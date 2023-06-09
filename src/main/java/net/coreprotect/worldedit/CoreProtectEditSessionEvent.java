@@ -14,6 +14,7 @@ import net.coreprotect.config.Config;
 import net.coreprotect.config.ConfigHandler;
 import net.coreprotect.language.Phrase;
 import net.coreprotect.language.Selector;
+import net.coreprotect.thread.Scheduler;
 import net.coreprotect.utility.Chat;
 
 public class CoreProtectEditSessionEvent {
@@ -24,6 +25,10 @@ public class CoreProtectEditSessionEvent {
 
     public static boolean isInitialized() {
         return initialized;
+    }
+
+    public static boolean isFAWE() {
+        return isFAWE;
     }
 
     public static void register() {
@@ -43,7 +48,7 @@ public class CoreProtectEditSessionEvent {
             // Failed to initialize WorldEdit logging
         }
 
-        Bukkit.getServer().getScheduler().runTask(CoreProtect.getInstance(), () -> {
+        Scheduler.runTask(CoreProtect.getInstance(), () -> {
             try {
                 if (isInitialized()) {
                     Chat.console(Phrase.build(Phrase.INTEGRATION_SUCCESS, "WorldEdit", Selector.FIRST));
